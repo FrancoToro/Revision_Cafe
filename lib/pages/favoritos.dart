@@ -7,7 +7,7 @@ import 'FrappeScreen.dart';
 import 'LatteScreen.dart';
 import 'buscar.dart';
 import 'my_home_page.dart';
-import 'perfil.dart';
+import 'mibarista.dart';
 import 'Opinion.dart';
 import 'package:cafemixes/utils/colors.dart';
 
@@ -96,7 +96,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
             ),
             ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text('Perfil'),
+              title: Text('Mi barista'),
               onTap: () {
                 Navigator.push(
                   context,
