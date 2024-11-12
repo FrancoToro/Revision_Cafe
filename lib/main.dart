@@ -25,8 +25,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CafeMixes',
+      theme: ThemeData(
+        primarySwatch: Colors.Cafe,
+      ),
       home: const MyHomePage(),
-      color: const Color.fromARGB(221, 255, 255, 255),
+
     );
   }
 }
