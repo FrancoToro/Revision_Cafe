@@ -3,8 +3,14 @@ import 'favoritos.dart';
 import 'buscar.dart';
 import 'perfil.dart';
 import 'my_home_page.dart';
+import 'package:cafemixes/model/Receta.dart';
 
+//escena recetas
 class FrappeScreen extends StatefulWidget {
+  final Receta recipe;
+
+  const FrappeScreen(this.recipe);
+
   @override
   _FrappeScreenState createState() => _FrappeScreenState();
 }
@@ -16,6 +22,7 @@ class _FrappeScreenState extends State<FrappeScreen> {
     setState(() {
       _rating = rating;
     });
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Has calificado esta receta con $_rating estrella${_rating > 1 ? 's' : ''}.'),
@@ -27,7 +34,7 @@ class _FrappeScreenState extends State<FrappeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Receta: Frappe Chocolate'),
+        title: Text('Receta: ${widget.recipe.nombre}'),
       ),
       endDrawer: Drawer(
         child: ListView(
@@ -95,19 +102,19 @@ class _FrappeScreenState extends State<FrappeScreen> {
             children: [
               Center(
                 child: Image.network(
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPTtEaEnFb-Ko48_nTjuZLb86K0go1b8wcAQ&s',
+                  widget.recipe.imagen,
                   height: 200,
                   fit: BoxFit.cover,
                 ),
               ),
               SizedBox(height: 16),
               Text(
-                'Frappe de Chocolate',
+                '${widget.recipe.nombre}',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
               Text(
-                'Una deliciosa bebida refrescante con sabor a chocolate.',
+                '${widget.recipe.descripcion}',
                 style: TextStyle(fontSize: 16),
               ),
               Divider(height: 32, color: Colors.black),
@@ -116,23 +123,41 @@ class _FrappeScreenState extends State<FrappeScreen> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-              Text('- 1 taza de leche'),
+              ListView.builder(
+                itemCount: widget.recipe.ingredientes.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(widget.recipe.ingredientes[index])
+                  );
+                }
+              ),
+              /*Text('- 1 taza de leche'),
               Text('- 1/2 taza de hielo'),
               Text('- 2 cucharadas de chocolate en polvo'),
               Text('- 2 cucharadas de azúcar'),
               Text('- Crema batida al gusto'),
               Text('- Salsa de chocolate para decorar'),
+              */
               Divider(height: 32, color: Colors.black),
               Text(
                 'Instrucciones',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-              Text('1. Mezcla la leche, el hielo, el chocolate en polvo y el azúcar en una licuadora.'),
+              ListView.builder(
+                itemCount: widget.recipe.pasos.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(widget.recipe.pasos[index])
+                  );
+                }
+              ),
+              /*Text('1. Mezcla la leche, el hielo, el chocolate en polvo y el azúcar en una licuadora.'),
               Text('2. Licúa hasta que la mezcla esté suave y espesa.'),
               Text('3. Vierte la mezcla en un vaso y agrega crema batida encima.'),
               Text('4. Decora con salsa de chocolate al gusto.'),
               Text('5. ¡Disfruta tu frappe de chocolate!'),
+              */
               SizedBox(height: 32),
               Text(
                 'Califica esta receta:',

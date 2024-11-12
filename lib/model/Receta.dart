@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cafemixes/utils/DatabaseHelper.dart';
 
 class Receta {
   late int id;
@@ -36,9 +37,9 @@ class Receta {
   ingredientes = json['ingredientes'] as List<String>,
   productos = json['productos'] as List<String>,
   pasos = json['pasos'] as List<String>,
-  rating = json['rating'] as int,
+  rating = json['rating'] as int
   {
-    fav = f;
+    favorita = f;
   }
 
 

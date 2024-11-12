@@ -34,18 +34,19 @@ class DatabaseHelper
       await db.insert('recipes', data, conflictAlgorithm: ConflictAlgorithm.replace);
     }
 
-    Future<void> updateRecipe(Receta r) async
+    static Future<void> updateRecipe(Receta r) async
     {
       final db = await database;
       Map<String, Object?> data =
       {
         'id': r.id,
-        'recipe': jsonEncode(r.toJson())
+        'recipe': jsonEncode(r.toJson()),
+        'fav': r.favorita ? 1:0
       };
       await db.update('recipes', data, where: 'id = ?', whereArgs: [r.id]);
     }
 
-    Future<List<Receta>> GetRecipes() async {
+    static Future<List<Receta>> GetRecipes() async {
       final db = await database;
 
       final List<Map<String, Object?>> dbMaps = await db.query('recipes');
@@ -60,7 +61,7 @@ class DatabaseHelper
       ];
     }
 
-    Future<List<Receta>> GetFavoriteRecipes() async {
+    static Future<List<Receta>> GetFavoriteRecipes() async {
       final db = await database;
 
       final List<Map<String, Object?>> dbMaps = await db.query('recipes',where: 'fav = ?', whereArgs: [1]);
@@ -74,7 +75,7 @@ class DatabaseHelper
       ];
     }
 
-    Future<Receta> GetRecipeById(int id) async
+    static Future<Receta> GetRecipeById(int id) async
     {
       final db = await database;
       final List<Map<String, Object?>> dbMaps = await db.query('recipes',where: 'id = ?', whereArgs: [id]);
@@ -86,9 +87,10 @@ class DatabaseHelper
         [
         for (final {
           'id': id as int,
-          'recipe': recipe as String
+          'recipe': recipe as String,
+          'fav': fav as bool
         } in dbMaps)
-        Receta.fromJson(jsonDecode(recipe))];
+        Receta.fromJson(jsonDecode(recipe), f: fav)];
 
         return list.first;
       }

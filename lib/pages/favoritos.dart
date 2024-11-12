@@ -1,5 +1,6 @@
 import 'package:cafemixes/utils/DatabaseHelper.dart';
 import 'package:cafemixes/model/Receta.dart';
+import 'package:cafemixes/utils/flutter/packages/flutter/test/widgets/scroll_activity_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'FrappeScreen.dart';
@@ -46,7 +47,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
   ];
   */
 
-  final Future<List<Receta>> favoriteRecipes = DatabaseHelper().GetFavoriteRecipes();
+  final Future<List<Receta>> favoriteRecipes = DatabaseHelper.GetFavoriteRecipes();
 
   @override
   Widget build(BuildContext context) {
@@ -135,54 +136,39 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
     return FutureBuilder<List<Receta>>(
       future: favoriteRecipes,
       builder: (context, snapshot) {
-        if (snapshot.hasData)
+        List<Widget> children;
+        if (!snapshot.hasData)
         {
-
-        } else {
-
-        }
-      } 
-      );
-
-    if (favoriteRecipes.isEmpty) {
-      return Center(
-        child: Text(
-          'No tienes recetas favoritas aún.',
-          style: TextStyle(fontSize: 18),
-        ),
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Número de columnas
-            childAspectRatio: 0.8, // Ajusta el aspecto de las tarjetas
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-          ),
-          itemCount: favoriteRecipes.length,
-          itemBuilder: (context, index) {
-            final recipe = favoriteRecipes[index];
-            return Card(
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+          return Center(
+            child: Text('No tienes recetas favoritas aún.',
+              style: TextStyle(fontSize: 18),
               ),
-              child: InkWell(
-                onTap: () {
-                  if (recipe['title'] == 'Frappe Chocolate') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => FrappeScreen()),
-                    );
-                  } else if (recipe['title'] == 'Latte Vainilla') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LatteScreen()),
-                    );
-                  }
-                },
+            );
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Número de columnas
+                childAspectRatio: 0.8, // Ajusta el aspecto de las tarjetas
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: snapshot.data?.length,
+              itemBuilder: (context, index) {
+                final recipe = snapshot.data?[index];
+                return Card(
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => FrappeScreen(recipe)),
+                          );
+                    },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -191,7 +177,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
                         borderRadius: BorderRadius.vertical(
                             top: Radius.circular(10)),
                         child: Image.network(
-                          recipe['imageUrl']!,
+                          recipe!.imagen,
                           width: double.infinity,
                           fit: BoxFit.cover,
                         ),
@@ -203,7 +189,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            recipe['title']!,
+                            recipe!.nombre,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -211,7 +197,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
                           ),
                           SizedBox(height: 4),
                           Text(
-                            recipe['description']!,
+                            recipe!.descripcion,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey[600],
@@ -234,7 +220,6 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
                               ),
                             ],
                           ),
-                            
                           ),
                         ],
                       ),
@@ -246,6 +231,8 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
           },
         ),
       );
-    }
+      }
+      },
+    );
   }
 }
