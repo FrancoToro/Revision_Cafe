@@ -5,9 +5,9 @@ import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper 
 {
-    static final database;
+    static Database database;
 
-    static void InitDatabase()
+    static void InitDatabase() async
     {
         database = openDatabase(
             join(await getDatabasesPath(),"coffee_db"),
