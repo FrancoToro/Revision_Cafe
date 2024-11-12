@@ -13,8 +13,11 @@ class DatabaseHelper
     {
         database = openDatabase(
             join(await getDatabasesPath(),"coffee_db"),
-            onCreate: (db, version) {
-                return db.execute("CREATE TABLE recipes(id INTEGER PRIMARY KEY AUTOINCREMENT, recipe STRING, fav INT)");
+            onCreate: (db, version) async {
+              await db.execute("CREATE TABLE recipes(id INTEGER PRIMARY KEY AUTOINCREMENT, recipe STRING, fav INT)");
+              //List<Map<String, Object?>> recipes;
+              //Receta();
+              //await db.insert('recipes', );
                 }, version: 1,
             );
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'favoritos.dart';
 import 'buscar.dart';
-import 'perfil.dart';
+import 'mibarista.dart';
 import 'my_home_page.dart';
 import 'package:cafemixes/model/Receta.dart';
 
