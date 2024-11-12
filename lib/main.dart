@@ -13,7 +13,7 @@ void main() async
   //iniciar y/o abrir la base de datos
   WidgetsFlutterBinding.ensureInitialized();
 
-  await DatabaseHelper.InitDatabase();
+  DatabaseHelper.InitDatabase();
 
   runApp(const MyApp());
 }
