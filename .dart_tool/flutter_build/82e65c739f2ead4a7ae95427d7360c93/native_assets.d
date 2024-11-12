@@ -1,0 +1,1 @@
+ C:\\Users\\torow\\OneDrive\\Documentos\\GitHub\\CafeMixes\\cafemixes\\.dart_tool\\flutter_build\\82e65c739f2ead4a7ae95427d7360c93\\native_assets.yaml: 

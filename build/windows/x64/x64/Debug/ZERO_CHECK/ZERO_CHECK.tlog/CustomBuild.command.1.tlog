@@ -1,0 +1,10 @@
+^C:\USERS\TOROW\ONEDRIVE\DOCUMENTOS\GITHUB\CAFEMIXES\CAFEMIXES\BUILD\WINDOWS\X64\CMAKEFILES\8A4DD63A6840E0C79B5265CF9E4B006F\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/torow/OneDrive/Documentos/GitHub/CafeMixes/cafemixes/windows -BC:/Users/torow/OneDrive/Documentos/GitHub/CafeMixes/cafemixes/build/windows/x64 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/torow/OneDrive/Documentos/GitHub/CafeMixes/cafemixes/build/windows/x64/cafemixes.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
