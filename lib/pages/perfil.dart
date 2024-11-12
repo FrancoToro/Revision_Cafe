@@ -4,6 +4,8 @@ import 'buscar.dart';
 import 'misrecetas.dart';
 import 'opinion.dart';
 import 'my_home_page.dart';
+import 'package:cafemixes/utils/colors.dart';
+
 class Perfil extends StatefulWidget {
   @override
   _PerfilState createState() => _PerfilState();

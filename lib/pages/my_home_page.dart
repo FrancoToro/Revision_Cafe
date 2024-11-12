@@ -6,37 +6,29 @@ import 'FrappeScreen.dart';
 import 'LatteScreen.dart';
 import 'perfil.dart';
 import 'opinion.dart';
+import 'package:cafemixes/utils/colors.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key}); // Corrección del constructor
   
   @override
+  
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  
   int _selectedIndex = 0;
+  List<String> _ultimasRecetas = [];
 
-  // Lista de recetas de ejemplo
-  final List<Map<String, String>> recipes = [
-    {
-      'title': 'Frappe Chocolate',
-      'description': 'Frappe con sabor a chocolate',
-      'imageUrl': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPTtEaEnFb-Ko48_nTjuZLb86K0go1b8wcAQ&s'
-    },
-    {
-      'title': 'Latte Vainilla',
-      'description': 'Café con leche y un toque de vainilla',
-      'imageUrl': 'https://osterstatic.reciperm.com/webp/10101.webp'
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        backgroundColor:  CafeColors.Cafe.shade300,
         leading: SvgPicture.asset(
           'assets/icons/cafe.svg',
           width: 50, // Ajuste del tamaño
@@ -57,13 +49,13 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Color.fromRGBO(114, 56, 56, 0.502),
+              decoration: BoxDecoration(
+                color:  CafeColors.Cafe.shade900,
               ),
-              child: const Text(
+              child: Text(
                 'Menú',
                 style: TextStyle(
-                  color: Colors.white,
+                  color:  CafeColors.Cafe.shade100,
                   fontSize: 24,
                 ),
               ),
@@ -105,90 +97,48 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context)=> CuestionarioScreen()),
-                ); // Cierra el Drawer
+                ); 
               },
             ),
           ],
         ),
       ),
-      body: _buildBody(),
-    );
-  }
-
-  Widget _buildBody() {
-    switch (_selectedIndex) {
-      case 0:
-        return _buildRecipeList(); // Pantalla principal de recetas
-      default:
-        return Container(); // Manejar otras pantallas si es necesario
-    }
-  }
-
-  Widget _buildRecipeList() {
-    return ListView.builder(
-      itemCount: recipes.length,
-      itemBuilder: (context, index) {
-        final recipe = recipes[index];
-        return Card(
-          margin: const EdgeInsets.all(10),
-          elevation: 3,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Column(
-            children: [
-              Image.network(
-                recipe['imageUrl']!,
-                width: double.infinity,
-                height: 150,
-                fit: BoxFit.cover,
+       body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Últimas recetas preparadas",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      recipe['title']!,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      recipe['description']!,
-                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                    ),
-                  ],
-                ),
-              ),
-              ButtonBar(
-                alignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      // Navegar a la pantalla adecuada según la receta seleccionada
-                      if (recipe['title'] == 'Frappe Chocolate') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => FrappeScreen()),
+            ),
+            const SizedBox(height: 16),
+            // Mostrar "Caso inicial" o la lista de recetas
+            _ultimasRecetas.isEmpty
+                ? const Text(
+                    "Aún no has visto ninguna receta.",
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: _ultimasRecetas.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(_ultimasRecetas[index]),
+                          leading: Icon(Icons.coffee),
+                          onTap: () {
+                            // Aquí puedes navegar a la pantalla de la receta seleccionada
+                          },
                         );
-                      } else if (recipe['title'] == 'Latte Vainilla') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LatteScreen()),
-                        );
-                      }
-                    },
-                    child: const Text('VER DETALLES'),
+                      },
+                    ),
                   ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 }

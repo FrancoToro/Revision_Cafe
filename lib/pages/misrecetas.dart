@@ -4,7 +4,8 @@ import 'buscar.dart';
 import 'perfil.dart';
 import 'my_home_page.dart';
 import 'opinion.dart';
-import 'Crearreceta.dart'; // Asegúrate de importar la pantalla de creación de recetas
+import 'Crearreceta.dart'; 
+import 'package:cafemixes/utils/colors.dart';
 
 class Misrecetas extends StatelessWidget {
   // Lista de recetas de ejemplo para la pantalla de "Mis Recetas"

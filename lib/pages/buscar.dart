@@ -3,6 +3,8 @@ import 'favoritos.dart';
 import 'perfil.dart';
 import 'my_home_page.dart';
 import 'opinion.dart';
+import 'package:cafemixes/utils/colors.dart';
+
 class Buscar extends StatefulWidget {
   @override
   _BuscarState createState() => _BuscarState();

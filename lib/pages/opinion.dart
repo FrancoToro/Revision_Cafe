@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:cafemixes/model/Cuestionario.dart';
+import 'package:cafemixes/utils/colors.dart';
 
 class CuestionarioScreen extends StatefulWidget {
   @override

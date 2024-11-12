@@ -6,6 +6,7 @@ import 'buscar.dart';
 import 'my_home_page.dart';
 import 'perfil.dart';
 import 'Opinion.dart';
+import 'package:cafemixes/utils/colors.dart';
 
 class FavoritesScreen extends StatelessWidget {
   @override
