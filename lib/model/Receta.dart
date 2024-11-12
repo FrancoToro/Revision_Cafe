@@ -7,8 +7,11 @@ class Receta {
   late List<String> ingredientes;
   late List<String> productos;
   late List<String> pasos;
+  late int rating;
   late bool favorita;
   late String imagen;
+
+  Receta(this.nombre, this.descripcion,this.ingredientes,this.productos,this.pasos,this.imagen );
 
   //crear version para meter a base de datos
   Map<String, dynamic> toJson()
@@ -19,24 +22,32 @@ class Receta {
       'descripcion': descripcion,
       'ingredientes': ingredientes,
       'pasos': pasos,
-      'favorita': favorita
+      'rating': rating,
+      'imagen': imagen
     };
   }
 
-  Receta.fromJson(Map<String,dynamic> json) :
+
+
+  Receta.fromJson(Map<String,dynamic> json, {bool f = false}) :
   id = json['id'] as int,
   nombre = json['nombre'] as String,
   descripcion = json['descripcion'] as String,
   ingredientes = json['ingredientes'] as List<String>,
   productos = json['productos'] as List<String>,
   pasos = json['pasos'] as List<String>,
+  rating = json['rating'] as int,
   favorita = json['favorita'] as bool;
 
 
-  void agregarIngrediente(String ingrediente) {
+  void agregarIngrediente(String ingrediente)
+  {
+    if (ingrediente.isNotEmpty) ingredientes.add(ingrediente);
   }
 
-  void agregarPaso(String paso) {
+  void agregarPaso(String paso)
+  {
+    if (paso.isNotEmpty) ingredientes.add(paso);
   }
 
   void marcarComoFavorito()
@@ -47,5 +58,9 @@ class Receta {
   void desmarcarComoFavorito()
   {
     favorita = false;
+  }
+
+  Future<void> UpdateInDatabase()
+  {
   }
 }

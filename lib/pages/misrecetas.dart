@@ -1,3 +1,4 @@
+import 'package:cafemixes/utils/DatabaseHelper.dart';
 import 'package:flutter/material.dart';
 import 'favoritos.dart';
 import 'buscar.dart';
@@ -6,8 +7,10 @@ import 'my_home_page.dart';
 import 'opinion.dart';
 import 'Crearreceta.dart'; 
 import 'package:cafemixes/utils/colors.dart';
+import 'package:cafemixes/model/Receta.dart';
 
 class Misrecetas extends StatelessWidget {
+
   // Lista de recetas de ejemplo para la pantalla de "Mis Recetas"
   final List<Map<String, String>> myRecipes = [
     {
@@ -24,6 +27,9 @@ class Misrecetas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final Future<List<Receta>> recetas = DatabaseHelper().GetRecipes();
+
     return Scaffold(
       endDrawer: Drawer(
         child: ListView(

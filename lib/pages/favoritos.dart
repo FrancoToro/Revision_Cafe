@@ -1,3 +1,5 @@
+import 'package:cafemixes/utils/DatabaseHelper.dart';
+import 'package:cafemixes/model/Receta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'FrappeScreen.dart';
@@ -28,7 +30,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
   int _selectedIndex = 0;
 
   // Lista de recetas de ejemplo
-  final List<Map<String, String>> favoriteRecipes = [
+  /*final List<Map<String, String>> favoriteRecipes = [
     {
       'title': 'Frappe Chocolate',
       'description': 'Frappe con sabor a chocolate',
@@ -42,10 +44,14 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
       'status': 'Me gusta',
     },
   ];
+  */
+
+  final Future<List<Receta>> favoriteRecipes = DatabaseHelper().GetFavoriteRecipes();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor:  CafeColors.Cafe.shade400,
@@ -124,7 +130,20 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
     );
   }
 
-  Widget _buildFavoritesBody() {
+  Widget _buildFavoritesBody()
+  {
+    return FutureBuilder<List<Receta>>(
+      future: favoriteRecipes,
+      builder: (context, snapshot) {
+        if (snapshot.hasData)
+        {
+
+        } else {
+
+        }
+      } 
+      );
+
     if (favoriteRecipes.isEmpty) {
       return Center(
         child: Text(
