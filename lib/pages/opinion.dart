@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:cafemixes/model/Cuestionario.dart';
 import 'package:cafemixes/utils/colors.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 class CuestionarioScreen extends StatefulWidget {
   @override
@@ -82,14 +83,35 @@ class _CuestionarioScreenState extends State<CuestionarioScreen> {
     }).toList();
   }
 
-  void _submit() {
-    // Puedes implementar el código para guardar o procesar las respuestas aquí.
-    print("Respuestas guardadas: ");
-    for (var pregunta in _cuestionario!.usabilidad) {
-      print('${pregunta.titulo}: ${pregunta.valor} estrellas');
-    }
-    for (var pregunta in _cuestionario!.contenido) {
-      print('${pregunta.titulo}: ${pregunta.valor} estrellas');
-    }
+  void _submit() async {
+  // Genera el contenido del correo con las respuestas del cuestionario
+  String mensaje = 'Respuestas del Cuestionario:\n\n';
+  mensaje += 'Sección: Usabilidad\n';
+  for (var pregunta in _cuestionario!.usabilidad) {
+    mensaje += '${pregunta.titulo}: ${pregunta.valor} estrellas\n';
   }
+  mensaje += '\nSección: Contenido\n';
+  for (var pregunta in _cuestionario!.contenido) {
+    mensaje += '${pregunta.titulo}: ${pregunta.valor} estrellas\n';
+  }
+
+  // Crea el correo
+  final email = Email(
+    subject: 'Resultados del Cuestionario',
+    body: mensaje,
+    recipients: ['torowinner11@gmail.com'], // Reemplaza con el correo del desarrollador
+  );
+
+  try {
+    // Envía el correo
+    await FlutterEmailSender.send(email);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Respuestas enviadas con éxito')),
+    );
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error al enviar las respuestas: $e')),
+    );
+  }
+}
 }
