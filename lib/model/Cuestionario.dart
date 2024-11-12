@@ -1,6 +1,6 @@
 class Pregunta {
   final String titulo;
-  late final int valor;
+  late int valor;
   final String min;
   final String max;
 
