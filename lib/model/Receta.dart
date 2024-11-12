@@ -37,7 +37,9 @@ class Receta {
   productos = json['productos'] as List<String>,
   pasos = json['pasos'] as List<String>,
   rating = json['rating'] as int,
-  favorita = json['favorita'] as bool;
+  {
+    fav = f;
+  }
 
 
   void agregarIngrediente(String ingrediente)
@@ -62,5 +64,6 @@ class Receta {
 
   Future<void> UpdateInDatabase()
   {
+    return DatabaseHelper.updateRecipe(this);
   }
 }
