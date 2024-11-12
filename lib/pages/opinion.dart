@@ -33,7 +33,9 @@ class _CuestionarioScreenState extends State<CuestionarioScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Cuestionario")),
+      appBar: AppBar(
+        backgroundColor:  CafeColors.Cafe.shade300,
+        title: Text("Cuestionario")),
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [

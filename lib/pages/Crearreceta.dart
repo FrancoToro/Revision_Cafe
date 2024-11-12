@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cafemixes/utils/colors.dart';
 
 class CreateRecipeScreen extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor:  CafeColors.Cafe.shade200,
         title: Text("Crear Receta"),
       ),
       body: Padding(
