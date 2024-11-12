@@ -4,7 +4,7 @@ import 'favoritos.dart';
 import 'buscar.dart';
 import 'FrappeScreen.dart';
 import 'LatteScreen.dart';
-import 'perfil.dart';
+import 'mibarista.dart';
 import 'opinion.dart';
 import 'package:cafemixes/utils/colors.dart';
 
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.favorite),
-              title: const Text('Favoritos'),
+              title: const Text('Mi barista'),
               onTap: () {
                 Navigator.push(
                   context,

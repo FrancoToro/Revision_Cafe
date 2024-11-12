@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'favoritos.dart';
-import 'perfil.dart';
+import 'mibarista.dart';
 import 'my_home_page.dart';
 import 'opinion.dart';
 import 'package:cafemixes/utils/colors.dart';
@@ -94,7 +94,7 @@ class _BuscarState extends State<Buscar> {
             ),
             ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text('Perfil'),
+              title: Text('Mi barista'),
               onTap: () {
                 Navigator.push(
                   context,

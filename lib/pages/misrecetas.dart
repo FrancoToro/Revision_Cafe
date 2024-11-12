@@ -2,7 +2,7 @@ import 'package:cafemixes/utils/DatabaseHelper.dart';
 import 'package:flutter/material.dart';
 import 'favoritos.dart';
 import 'buscar.dart';
-import 'perfil.dart';
+import 'mibarista.dart';
 import 'my_home_page.dart';
 import 'opinion.dart';
 import 'Crearreceta.dart'; 
@@ -56,7 +56,7 @@ class Misrecetas extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text('Perfil'),
+              title: Text('Mi barista'),
               onTap: () {
                 Navigator.push(
                   context,

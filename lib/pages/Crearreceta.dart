@@ -24,7 +24,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
   final List<TextEditingController> _stepControllers = [];
 
   final ImagePicker _picker = ImagePicker();
-
+  XFile? _imageFile;
   void _addIngredientField() {
     setState(() {
       _ingredientControllers.add(TextEditingController());
@@ -61,6 +61,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
     if (pickedFile != null) {
       setState(() {
         _selectedImage = File(pickedFile.path);
+        _imageFile = pickedFile;
       });
     }
   }
@@ -223,7 +224,10 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                     
 
                     //guardado
-
+                    //
+                    //_imageFile
+                    //imagen :_imageFile!.path
+                    //DatabaseHelper.AddRecipe(r);
                     // Lógica para guardar la receta
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
