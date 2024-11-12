@@ -37,6 +37,7 @@ class _PerfilState extends State<Perfil>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor:  CafeColors.Cafe.shade400,
         leading: Icon(Icons.account_circle),
         title: Text('Perfil de Usuario'),
         bottom: TabBar(

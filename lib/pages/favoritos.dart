@@ -54,6 +54,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
 
       key: _scaffoldKey,
       appBar: AppBar(
+        backgroundColor:  CafeColors.Cafe.shade400,
         leading: Icon(Icons.favorite_border),
         title: Text("Mis Favoritos"),
         actions: [
