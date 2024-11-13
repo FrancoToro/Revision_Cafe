@@ -9,11 +9,11 @@ import 'package:cafemixes/model/Receta.dart';
 
 class DatabaseHelper 
 { 
-    static late final Database database;
+    static late final Future<Database> database;
 
     static _onCreate(Database db, int version) async
     {
-      await db.execute("CREATE TABLE recipes(id INTEGER PRIMARY KEY, recipe STRING, fav INT)");        
+      await db.execute("CREATE TABLE recipes (id INTEGER PRIMARY KEY, recipe TEXT, fav INTEGER)");        
       
       for (int i = 1; i<5; i++)
       {
@@ -31,10 +31,10 @@ class DatabaseHelper
       }
     }
 
-    static void InitDatabase() async
+    static Future<void> InitDatabase() async
     {
       
-        database = await openDatabase(
+        database = openDatabase(
             join(await getDatabasesPath(),"coffee_db"),
             onCreate: _onCreate,
             version: 1,
