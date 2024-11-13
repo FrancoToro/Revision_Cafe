@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:async';
+import 'package:flutter/services.dart' ;
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:cafemixes/model/Receta.dart';
 
 class DatabaseHelper 
-{
+{ 
     static late final Future<Database> database;
 
     static void InitDatabase() async
@@ -14,11 +16,21 @@ class DatabaseHelper
         database = openDatabase(
             join(await getDatabasesPath(),"coffee_db"),
             onCreate: (db, version) async {
-              await db.execute("CREATE TABLE recipes(id INTEGER PRIMARY KEY AUTOINCREMENT, recipe STRING, fav INT)");
-              //List<Map<String, Object?>> recipes;
-              //Receta();
-              //await db.insert('recipes', );
-                }, version: 1,
+              await db.execute("CREATE TABLE recipes(id INTEGER PRIMARY KEY, recipe STRING, fav INT)");
+              
+              for (int i = 1; i<5; i++)
+              {
+                String n1 = await readAsset('assets/recipe${i}.json');
+                Map<String, Object?> data =
+                {
+                  'id': i,
+                  'recipe': n1,
+                  'fav': 0
+                };
+
+                await db.insert('recipe',data);
+              }
+              }, version: 1,
             );
     }
 
@@ -99,5 +111,10 @@ class DatabaseHelper
       }
 
       throw new FormatException("BASE DE DATOS VACIA");
+    }
+
+    static Future<String> readAsset(String n) async
+    {
+      return await rootBundle.loadString(n);
     }
 }
