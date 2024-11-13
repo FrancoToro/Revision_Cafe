@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'favoritos.dart';
 import 'buscar.dart';
 import 'ViewerScreen.dart';
-import 'Recetaviewer.dart';
 import 'mibarista.dart';
 import 'opinion.dart';
 import 'package:cafemixes/utils/colors.dart';
@@ -87,16 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context)=> CuestionarioScreen()),
-                ); 
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.ad_units_outlined),
-              title: Text('Receta'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context)=> Recetaviewer()),
                 ); 
               },
             ),

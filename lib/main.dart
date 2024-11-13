@@ -10,10 +10,9 @@ import 'package:cafemixes/utils/DatabaseHelper.dart';
 
 void main() async
 {
-  //iniciar y/o abrir la base de datos
-  WidgetsFlutterBinding.ensureInitialized();
 
-  DatabaseHelper.InitDatabase();
+  WidgetsFlutterBinding.ensureInitialized();
+  await DatabaseHelper.InitDatabase();
 
   runApp(const MyApp());
 }

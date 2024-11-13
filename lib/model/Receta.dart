@@ -34,9 +34,10 @@ class Receta {
   id = json['id'] as int,
   nombre = json['nombre'] as String,
   descripcion = json['descripcion'] as String,
-  ingredientes = json['ingredientes'] as List<String>,
-  productos = json['productos'] as List<String>,
-  pasos = json['pasos'] as List<String>,
+  ingredientes = List<String>.from(json['ingredientes'] as List),
+  productos = List<String>.from(json['productos'] as List),
+  pasos = List<String>.from(json['pasos'] as List),
+  imagen = json['imagen'] as String,
   rating = json['rating'] as int
   {
     favorita = f;

@@ -59,7 +59,7 @@ class Misrecetas extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => FavoritesScreen()),
-                ); // Cierra el Drawer
+                );
               },
             ),
             ListTile(
@@ -69,113 +69,112 @@ class Misrecetas extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context)=> CuestionarioScreen()),
-                ); // Cierra el Drawer
+                );
               },
             ),
           ],
         ),
       ),
-      body: Center(
-        child: FutureBuilder<List<Receta>>(
-          future: recetas,
-          builder: (context, snapshot) {
-            List<Widget> children;
-            if (!snapshot.hasData)
-            {
-              return Center(
-                child: Text('No tienes recetas favoritas aún.',
+      body: FutureBuilder<List<Receta>>(
+        future: recetas,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error al cargar las recetas: ${snapshot.error}'),
+            );
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(
+              child: Text(
+                'No tienes recetas aún.',
                 style: TextStyle(fontSize: 18),
+              ),
+            );
+          } else {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Número de columnas
+                  childAspectRatio: 0.8, // Ajusta el aspecto de las tarjetas
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
                 ),
-                );
-            } else {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Número de columnas
-                    childAspectRatio: 0.8, // Ajusta el aspecto de las tarjetas
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                  ),
-                  itemCount: snapshot.data?.length,
-                  itemBuilder: (context, index) {
-                    final recipe = snapshot.data?[index];
-                    return Card(
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ViewerScreen(recipe)),
-                          );
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.vertical(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  final recipe = snapshot.data![index];
+                  return Card(
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ViewerScreen(recipe)),
+                        );
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(10)),
-                                child: Image.network(
-                                  recipe!.imagen,
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
+                              child: Image.network(
+                                recipe.imagen,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    recipe!.nombre,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  recipe.nombre,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  SizedBox(height: 4),
-                                  Text(
-                                    recipe!.descripcion,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey[600],
-                                    ),
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  recipe.descripcion,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey[600],
                                   ),
-                                  SizedBox(height: 8),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromARGB(255, 255, 0, 0),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                    child: Stack( // Centrar el ícono
-                                    children: [
-                                      Icon(
-                                        Icons.favorite,
-                                        color: Colors.white, // Color del ícono
-                                        size: 32, // Tamaño del ícono
-                                        ),
-                                      ],
-                                      ),
+                                ),
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromARGB(255, 255, 0, 0),
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
+                                  child: Icon(
+                                    Icons.favorite,
+                                    color: Colors.white,
+                                    size: 32,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ],
-                ),
+                  );
+                },
               ),
             );
-          },
-        ),
-      );
-      }
-      },
-    )
+          }
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

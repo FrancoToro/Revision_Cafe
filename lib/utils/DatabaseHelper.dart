@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/services.dart' ;
 
 import 'package:path/path.dart';
@@ -10,9 +11,9 @@ import 'package:cafemixes/model/Receta.dart';
 class DatabaseHelper 
 { 
     static late final Future<Database> database;
-
     static _onCreate(Database db, int version) async
     {
+          print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
       await db.execute("CREATE TABLE recipes (id INTEGER PRIMARY KEY, recipe TEXT, fav INTEGER)");        
       
       for (int i = 1; i<5; i++)
@@ -33,12 +34,20 @@ class DatabaseHelper
 
     static Future<void> InitDatabase() async
     {
+      var databasesPath = await getDatabasesPath();
+
+      print(databasesPath+ "***********************");
+
+      // Make sure the directory exist
+      try {
+        await Directory(databasesPath).create(recursive: true);
+      } catch (_) { print("ERROR FATAL***************************************************");}
       
-        database = openDatabase(
-            join(await getDatabasesPath(),"coffee_db"),
-            onCreate: _onCreate,
-            version: 1,
-            );
+      database = openDatabase(
+          join(await getDatabasesPath(),"coffee_db"),
+          onCreate: _onCreate,
+          version: 1,
+          );
     }
 
     //guardar en base de dato a partir de objeto
@@ -73,14 +82,13 @@ class DatabaseHelper
 
       final List<Map<String, Object?>> dbMaps = await db.query('recipes');
 
-      return [
-        for (final {
-          'id': id as int,
-          'recipe': recipe as String,
-          'fav': fav as bool
-        } in dbMaps)
-        Receta.fromJson(jsonDecode(recipe), f: fav)
-      ];
+      List<Receta> recetas = [];
+      for (Map<String, Object?> map in dbMaps)
+      {
+        recetas.add(Receta.fromJson(jsonDecode(map['recipe'] as String), f: map['fav'] == 0 ? false : true));
+      }
+
+      return recetas;
     }
 
     static Future<List<Receta>> GetFavoriteRecipes() async {
