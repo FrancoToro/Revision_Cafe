@@ -7,6 +7,7 @@ import 'package:cafemixes/model/Receta.dart';
 
 //escena recetas
 class ViewerScreen extends StatefulWidget {
+  
   final Receta recipe;
 
   const ViewerScreen(this.recipe);
@@ -32,9 +33,12 @@ class _ViewerScreenState extends State<ViewerScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    Receta r = widget.recipe;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Receta: ${widget.recipe.nombre}'),
+        title: Text('Receta: ${r.nombre}'),
       ),
       endDrawer: Drawer(
         child: ListView(
@@ -92,14 +96,14 @@ class _ViewerScreenState extends State<ViewerScreen> {
             children: [
               Center(
                 child: Image.network(
-                  widget.recipe.imagen,
+                  r.imagen,
                   height: 200,
                   fit: BoxFit.cover,
                 ),
               ),
               SizedBox(height: 16),
               Text(
-                '${widget.recipe.nombre}',
+                '${r.nombre}',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
@@ -114,20 +118,13 @@ class _ViewerScreenState extends State<ViewerScreen> {
               ),
               SizedBox(height: 8),
               ListView.builder(
-                itemCount: widget.recipe.ingredientes.length,
+                itemCount: r.ingredientes.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(widget.recipe.ingredientes[index])
+                    title: Text(r.ingredientes[index])
                   );
                 }
               ),
-              /*Text('- 1 taza de leche'),
-              Text('- 1/2 taza de hielo'),
-              Text('- 2 cucharadas de chocolate en polvo'),
-              Text('- 2 cucharadas de azúcar'),
-              Text('- Crema batida al gusto'),
-              Text('- Salsa de chocolate para decorar'),
-              */
               Divider(height: 32, color: Colors.black),
               Text(
                 'Instrucciones',
@@ -135,19 +132,13 @@ class _ViewerScreenState extends State<ViewerScreen> {
               ),
               SizedBox(height: 8),
               ListView.builder(
-                itemCount: widget.recipe.pasos.length,
+                itemCount: r.pasos.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(widget.recipe.pasos[index])
+                    title: Text(r.pasos[index])
                   );
                 }
               ),
-              /*Text('1. Mezcla la leche, el hielo, el chocolate en polvo y el azúcar en una licuadora.'),
-              Text('2. Licúa hasta que la mezcla esté suave y espesa.'),
-              Text('3. Vierte la mezcla en un vaso y agrega crema batida encima.'),
-              Text('4. Decora con salsa de chocolate al gusto.'),
-              Text('5. ¡Disfruta tu frappe de chocolate!'),
-              */
               SizedBox(height: 32),
               Text(
                 'Califica esta receta:',
