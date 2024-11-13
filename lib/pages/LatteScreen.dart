@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart'; // Importa el paquete share_plus
+
 import 'favoritos.dart';
 import 'buscar.dart';
 import 'mibarista.dart';
@@ -23,11 +25,24 @@ class _LatteScreenState extends State<LatteScreen> {
     );
   }
 
+  void _shareRecipe() {
+    Share.share(
+      'Receta: Latte Vainilla\n\nIngredientes:\n- 1 taza de leche\n- 1 taza de café espresso\n- 1 cucharadita de esencia de vainilla\n- 2 cucharadas de azúcar o al gusto\n- Canela en polvo para decorar (opcional)\n\nInstrucciones:\n1. Calienta la leche en una olla a fuego medio hasta que esté caliente, pero sin que hierva. Añade la esencia de vainilla y el azúcar a la leche caliente, y mezcla bien.\n2. Prepara el café espresso y viértelo en una taza grande.\n3. Vierte la leche caliente sobre el café, formando una capa de espuma en la parte superior.\n4. Decora con un poco de canela en polvo si lo deseas. Disfruta.',
+      subject: 'Receta de Latte Vainilla'
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Receta: Latte Vainilla'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: _shareRecipe, // Llama a la función de compartir
+          ),
+        ],
       ),
       endDrawer: Drawer(
         child: ListView(

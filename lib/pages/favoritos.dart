@@ -1,6 +1,5 @@
 import 'package:cafemixes/utils/DatabaseHelper.dart';
 import 'package:cafemixes/model/Receta.dart';
-import 'package:cafemixes/utils/flutter/packages/flutter/test/widgets/scroll_activity_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'FrappeScreen.dart';

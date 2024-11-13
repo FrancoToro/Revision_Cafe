@@ -100,6 +100,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 ); 
               },
             ),
+            ListTile(
+              leading: Icon(Icons.ad_units_outlined),
+              title: Text('Receta'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=> LatteScreen()),
+                ); 
+              },
+            ),
           ],
         ),
       ),

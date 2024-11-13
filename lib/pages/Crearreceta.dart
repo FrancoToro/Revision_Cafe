@@ -3,6 +3,7 @@ import 'package:cafemixes/utils/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:cafemixes/utils/DatabaseHelper.dart';
+import 'package:cafemixes/model/Receta.dart';
 
 class CreateRecipeScreen extends StatefulWidget {
   @override
@@ -224,10 +225,9 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                     
 
                     //guardado
-                    //
-                    //_imageFile
-                    //imagen :_imageFile!.path
-                    //DatabaseHelper.AddRecipe(r);
+                    //this.nombre, this.descripcion,this.ingredientes,this.productos,this.pasos,this.imagen
+                    
+                    DatabaseHelper.AddRecipe(Receta(nombre,descripcion,ingredientes,productos,pasos,_imageFile!.path));
                     // Lógica para guardar la receta
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
