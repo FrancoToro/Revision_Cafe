@@ -25,7 +25,7 @@ class DatabaseHelper
                 {
                   'id': i,
                   'recipe': n1,
-                  'fav': 0
+                  'fav': 1
                 };
 
                 await db.insert('recipe',data);
