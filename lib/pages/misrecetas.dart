@@ -8,22 +8,9 @@ import 'opinion.dart';
 import 'Crearreceta.dart'; 
 import 'package:cafemixes/utils/colors.dart';
 import 'package:cafemixes/model/Receta.dart';
+import 'FrappeScreen.dart';
 
 class Misrecetas extends StatelessWidget {
-
-  // Lista de recetas de ejemplo para la pantalla de "Mis Recetas"
-  final List<Map<String, String>> myRecipes = [
-    {
-      'title': 'Café Espresso',
-      'description': 'Un café espresso fuerte y aromático',
-      'imageUrl': 'https://example.com/espresso.jpg',
-    },
-    {
-      'title': 'Capuchino',
-      'description': 'Café con leche y espuma',
-      'imageUrl': 'https://example.com/capuchino.jpg',
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +43,7 @@ class Misrecetas extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text('Mi barista'),
+              title: Text('Perfil'),
               onTap: () {
                 Navigator.push(
                   context,
@@ -98,13 +85,112 @@ class Misrecetas extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Text('Mis Recetas'), // Puedes mostrar tus recetas aquí
+        child: FutureBuilder<List<Receta>>(
+          future: recetas,
+          builder: (context, snapshot) {
+            List<Widget> children;
+            if (!snapshot.hasData)
+            {
+              return Center(
+                child: Text('No tienes recetas favoritas aún.',
+                style: TextStyle(fontSize: 18),
+                ),
+                );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // Número de columnas
+                    childAspectRatio: 0.8, // Ajusta el aspecto de las tarjetas
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (context, index) {
+                    final recipe = snapshot.data?[index];
+                    return Card(
+                      elevation: 3,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => FrappeScreen(recipe)),
+                          );
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(10)),
+                                child: Image.network(
+                                  recipe!.imagen,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    recipe!.nombre,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    recipe!.descripcion,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey[600],
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                                      decoration: BoxDecoration(
+                                        color: const Color.fromARGB(255, 255, 0, 0),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    child: Stack( // Centrar el ícono
+                                    children: [
+                                      Icon(
+                                        Icons.favorite,
+                                        color: Colors.white, // Color del ícono
+                                        size: 32, // Tamaño del ícono
+                                        ),
+                                      ],
+                                      ),
+                                  ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      );
+      }
+      },
+    )
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CreateRecipeScreen()), // Asegúrate de que esta pantalla exista
+            MaterialPageRoute(builder: (context) => CreateRecipeScreen()),
           );
         },
         tooltip: 'Crear Receta',

@@ -20,7 +20,7 @@ class DatabaseHelper
               
               for (int i = 1; i<5; i++)
               {
-                String n1 = await readAsset('assets/recipe${i}.json');
+                String n1 = await readAsset('assets/recipe$i.json');
                 Map<String, Object?> data =
                 {
                   'id': i,
@@ -28,7 +28,7 @@ class DatabaseHelper
                   'fav': 1
                 };
 
-                await db.insert('recipe',data);
+                await db.insert('recipe',data, conflictAlgorithm: ConflictAlgorithm.replace);
               }
               }, version: 1,
             );
