@@ -26,6 +26,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
 
   final ImagePicker _picker = ImagePicker();
   XFile? _imageFile;
+
   void _addIngredientField() {
     setState(() {
       _ingredientControllers.add(TextEditingController());
@@ -59,6 +60,17 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
   // Método para seleccionar una imagen de la galería
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _selectedImage = File(pickedFile.path);
+        _imageFile = pickedFile;
+      });
+    }
+  }
+
+  // Método para tomar una foto con la cámara
+  Future<void> _takePhoto() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       setState(() {
         _selectedImage = File(pickedFile.path);
@@ -197,6 +209,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                 icon: Icon(Icons.add),
                 onPressed: _addStepField,
               ),
+              
               // Imagen seleccionada
               if (_selectedImage != null)
                 Image.file(
@@ -208,10 +221,15 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: _pickImage,
-                    child: Icon(Icons.add_a_photo),
+                    child: Icon(Icons.photo_library),
                   ),
-                  SizedBox(width: 30),
-                  Text('Subir Foto'),
+                  SizedBox(width: 10),
+                  ElevatedButton(
+                    onPressed: _takePhoto,
+                    child: Icon(Icons.camera_alt),
+                  ),
+                  SizedBox(width: 10),
+                  Text('Subir Foto / Tomar Foto'),
                 ],
               ),
               SizedBox(height: 40),
@@ -222,13 +240,8 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                     ingredientes = _ingredientControllers.map((e) => e.text).toList();
                     productos = _productControllers.map((e) => e.text).toList();
                     pasos = _stepControllers.map((e) => e.text).toList();
-                    
-
-                    //guardado
-                    //this.nombre, this.descripcion,this.ingredientes,this.productos,this.pasos,this.imagen
-                    
-                    DatabaseHelper.AddRecipe(Receta(nombre,descripcion,ingredientes,productos,pasos,_imageFile!.path));
-                    // Lógica para guardar la receta
+                     
+                    DatabaseHelper.AddRecipe(Receta(nombre, descripcion, ingredientes, productos, pasos, _imageFile!.path));
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Receta guardada con éxito'),
