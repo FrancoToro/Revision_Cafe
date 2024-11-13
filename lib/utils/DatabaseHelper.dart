@@ -9,28 +9,35 @@ import 'package:cafemixes/model/Receta.dart';
 
 class DatabaseHelper 
 { 
-    static late final Future<Database> database;
+    static late final Database database;
+
+    static _onCreate(Database db, int version) async
+    {
+      await db.execute("CREATE TABLE recipes(id INTEGER PRIMARY KEY, recipe STRING, fav INT)");        
+      
+      for (int i = 1; i<5; i++)
+      {
+        String n1 = await readAsset('assets/recipe$i.json');
+        Map<String, Object?> data =
+        {
+          'id': i,
+          'recipe': n1,
+          'fav': 1
+        };
+
+        await db.insert('recipes',data, conflictAlgorithm: ConflictAlgorithm.replace);
+
+        print("insertado $i : $n1");
+      }
+    }
 
     static void InitDatabase() async
     {
-        database = openDatabase(
+      
+        database = await openDatabase(
             join(await getDatabasesPath(),"coffee_db"),
-            onCreate: (db, version) async {
-              await db.execute("CREATE TABLE recipes(id INTEGER PRIMARY KEY, recipe STRING, fav INT)");
-              
-              for (int i = 1; i<5; i++)
-              {
-                String n1 = await readAsset('assets/recipe$i.json');
-                Map<String, Object?> data =
-                {
-                  'id': i,
-                  'recipe': n1,
-                  'fav': 1
-                };
-
-                await db.insert('recipes',data, conflictAlgorithm: ConflictAlgorithm.replace);
-              }
-              }, version: 1,
+            onCreate: _onCreate,
+            version: 1,
             );
     }
 
