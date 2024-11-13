@@ -28,7 +28,7 @@ class Misrecetas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final Future<List<Receta>> recetas = DatabaseHelper().GetRecipes();
+    final Future<List<Receta>> recetas = DatabaseHelper.GetRecipes();
 
     return Scaffold(
       endDrawer: Drawer(
