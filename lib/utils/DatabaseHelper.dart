@@ -28,7 +28,7 @@ class DatabaseHelper
                   'fav': 1
                 };
 
-                await db.insert('recipe',data, conflictAlgorithm: ConflictAlgorithm.replace);
+                await db.insert('recipes',data, conflictAlgorithm: ConflictAlgorithm.replace);
               }
               }, version: 1,
             );
