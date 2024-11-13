@@ -1,3 +1,4 @@
+import 'package:cafemixes/utils/DatabaseHelper.dart';
 import 'package:flutter/material.dart';
 import 'favoritos.dart';
 import 'buscar.dart';
@@ -5,23 +6,18 @@ import 'mibarista.dart';
 import 'my_home_page.dart';
 import 'package:cafemixes/model/Receta.dart';
 
-//escena recetas
+// Escena de recetas
 class ViewerScreen extends StatelessWidget {
-  
   final Receta recipe;
 
   const ViewerScreen({super.key, required this.recipe});
 
-  /*ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text('Has calificado esta receta con $_rating estrella${_rating > 1 ? 's' : ''}.'),
-    ),
-  );
-  */
+  //const snackbar = SnackBar(content: Text("Has calificado esta receta con ${recipe.rating} estrella${recipe.rating > 1 ? 's' : ''}"));
+  
 
   @override
   Widget build(BuildContext context) {
-
+    const snackbar = SnackBar(content: Text("Has calificado esta receta"));
     return Scaffold(
       appBar: AppBar(
         title: Text('Receta: ${recipe.nombre}'),
@@ -43,21 +39,22 @@ class ViewerScreen extends StatelessWidget {
               ),
             ),
             ListTile(
-                leading: Icon(Icons.home),
-                title: Text('Inicio'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyHomePage()),
-                  );
-                }),
+              leading: Icon(Icons.home),
+              title: Text('Inicio'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
+              },
+            ),
             ListTile(
               leading: Icon(Icons.account_circle),
               title: Text('Perfil'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Perfil()),
+                  MaterialPageRoute(builder: (context) => Perfil()), // Asegúrate de que Perfil esté importado
                 );
               },
             ),
@@ -103,13 +100,16 @@ class ViewerScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-              ListView.builder(
-                itemCount: recipe.ingredientes.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(recipe.ingredientes[index])
-                  );
-                }
+              SizedBox(
+                height: 100, // Ajusta la altura según necesites
+                child: ListView.builder(
+                  itemCount: recipe.ingredientes.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(recipe.ingredientes[index]),
+                    );
+                  },
+                ),
               ),
               Divider(height: 32, color: Colors.black),
               Text(
@@ -117,15 +117,19 @@ class ViewerScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-              ListView.builder(
-                itemCount: recipe.pasos.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(recipe.pasos[index])
-                  );
-                }
+              SizedBox(
+                height: 200, // Ajusta la altura según necesites
+                child: ListView.builder(
+                  itemCount: recipe.pasos.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(recipe.pasos[index]),
+                    );
+                  },
+                ),
               ),
-              /*SizedBox(height: 32),
+              // Descomenta y define la lógica de calificación si deseas implementarla
+              SizedBox(height: 32),
               Text(
                 'Califica esta receta:',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -136,19 +140,25 @@ class ViewerScreen extends StatelessWidget {
                 children: List.generate(5, (index) {
                   return IconButton(
                     icon: Icon(
-                      _rating > index ? Icons.star : Icons.star_border,
+                      recipe.rating > index ? Icons.star : Icons.star_border,
                       color: Colors.yellow,
                     ),
                     onPressed: () {
-                      _rateRecipe(index + 1); // Calificación de 1 a 5
+                      Calificar(index); // Calificación de 1 a 5
                     },
                   );
                 }),
-              ),*/
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void Calificar(int index)
+  {
+    recipe.rating = index + 1; // Calificación de 1 a 5
+    DatabaseHelper.updateRecipe(recipe);
   }
 }

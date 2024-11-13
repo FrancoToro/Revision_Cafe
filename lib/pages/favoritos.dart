@@ -156,7 +156,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ViewerScreen(recipe)),
+                          MaterialPageRoute(builder: (context) => ViewerScreen(recipe: recipe)),
                           );
                     },
                 child: Column(

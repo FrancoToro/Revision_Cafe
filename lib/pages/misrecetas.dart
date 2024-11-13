@@ -100,7 +100,7 @@ class Misrecetas extends StatelessWidget {
       child: InkWell(
         onTap: (){
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context)=> ViewerScreen(recipe)),
+            MaterialPageRoute(builder: (context)=> ViewerScreen(recipe: recipe)),
           );
         },
         child: Column(
