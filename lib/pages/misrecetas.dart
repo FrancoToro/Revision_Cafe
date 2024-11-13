@@ -1,3 +1,4 @@
+import 'package:cafemixes/pages/ViewerScreen.dart';
 import 'package:cafemixes/utils/DatabaseHelper.dart';
 import 'package:flutter/material.dart';
 import 'favoritos.dart';
@@ -8,7 +9,7 @@ import 'opinion.dart';
 import 'Crearreceta.dart'; 
 import 'package:cafemixes/utils/colors.dart';
 import 'package:cafemixes/model/Receta.dart';
-import 'FrappeScreen.dart';
+import 'ViewerScreen.dart';
 
 class Misrecetas extends StatelessWidget {
 
@@ -108,7 +109,7 @@ class Misrecetas extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => FrappeScreen(recipe)),
+                            MaterialPageRoute(builder: (context) => ViewerScreen(recipe)),
                           );
                         },
                         child: Column(

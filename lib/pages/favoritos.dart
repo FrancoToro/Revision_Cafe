@@ -2,7 +2,7 @@ import 'package:cafemixes/utils/DatabaseHelper.dart';
 import 'package:cafemixes/model/Receta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'FrappeScreen.dart';
+import 'ViewerScreen.dart';
 import 'LatteScreen.dart';
 import 'buscar.dart';
 import 'my_home_page.dart';
@@ -156,7 +156,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => FrappeScreen(recipe)),
+                          MaterialPageRoute(builder: (context) => ViewerScreen(recipe)),
                           );
                     },
                 child: Column(

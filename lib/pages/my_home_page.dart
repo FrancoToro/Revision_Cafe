@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'favoritos.dart';
 import 'buscar.dart';
-import 'FrappeScreen.dart';
-import 'LatteScreen.dart';
+import 'ViewerScreen.dart';
+import 'Recetaviewer.dart';
 import 'mibarista.dart';
 import 'opinion.dart';
 import 'package:cafemixes/utils/colors.dart';
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context)=> LatteScreen()),
+                  MaterialPageRoute(builder: (context)=> Recetaviewer()),
                 ); 
               },
             ),

@@ -6,16 +6,16 @@ import 'my_home_page.dart';
 import 'package:cafemixes/model/Receta.dart';
 
 //escena recetas
-class FrappeScreen extends StatefulWidget {
+class ViewerScreen extends StatefulWidget {
   final Receta recipe;
 
-  const FrappeScreen(this.recipe);
+  const ViewerScreen(this.recipe);
 
   @override
-  _FrappeScreenState createState() => _FrappeScreenState();
+  _ViewerScreenState createState() => _ViewerScreenState();
 }
 
-class _FrappeScreenState extends State<FrappeScreen> {
+class _ViewerScreenState extends State<ViewerScreen> {
   int _rating = 0; // Calificación inicial
 
   void _rateRecipe(int rating) {

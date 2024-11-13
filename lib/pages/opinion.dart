@@ -7,7 +7,7 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 import 'favoritos.dart';
 import 'buscar.dart';
-import 'FrappeScreen.dart';
+import 'ViewerScreen.dart';
 import 'LatteScreen.dart';
 import 'mibarista.dart';
 import 'opinion.dart';
