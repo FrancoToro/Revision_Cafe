@@ -1,4 +1,5 @@
 import 'package:cafemixes/utils/DatabaseHelper.dart';
+import 'package:cafemixes/utils/flutter/dev/integration_tests/flutter_gallery/lib/demo/all.dart';
 import 'package:flutter/material.dart';
 import 'favoritos.dart';
 import 'buscar.dart';
@@ -7,13 +8,21 @@ import 'my_home_page.dart';
 import 'package:cafemixes/model/Receta.dart';
 
 // Escena de recetas
-class ViewerScreen extends StatelessWidget {
+class ViewerScreen extends StatefulWidget {
   final Receta recipe;
 
   const ViewerScreen({super.key, required this.recipe});
 
-  //const snackbar = SnackBar(content: Text("Has calificado esta receta con ${recipe.rating} estrella${recipe.rating > 1 ? 's' : ''}"));
-  
+  @override
+  State<StatefulWidget> createState() => _viewerState(recipe);
+
+}
+
+class _viewerState extends State<ViewerScreen>
+{
+  _viewerState(Receta r) : recipe=r;
+
+  Receta recipe;
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +167,9 @@ class ViewerScreen extends StatelessWidget {
 
   void Calificar(int index)
   {
-    recipe.rating = index + 1; // Calificación de 1 a 5
-    DatabaseHelper.updateRecipe(recipe);
+    setState(() {
+      recipe.rating = index + 1; // Calificación de 1 a 5
+      DatabaseHelper.updateRecipe(recipe);
+    });
   }
 }
