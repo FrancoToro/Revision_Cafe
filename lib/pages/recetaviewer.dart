@@ -11,20 +11,6 @@ import 'package:cafemixes/model/Receta.dart';
 
 class Misrecetas extends StatelessWidget {
 
-  // Lista de recetas de ejemplo para la pantalla de "Mis Recetas"
-  final List<Map<String, String>> myRecipes = [
-    {
-      'title': 'Café Espresso',
-      'description': 'Un café espresso fuerte y aromático',
-      'imageUrl': 'https://example.com/espresso.jpg',
-    },
-    {
-      'title': 'Capuchino',
-      'description': 'Café con leche y espuma',
-      'imageUrl': 'https://example.com/capuchino.jpg',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
 

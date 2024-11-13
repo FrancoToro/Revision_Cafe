@@ -5,6 +5,15 @@ import 'package:cafemixes/model/Cuestionario.dart';
 import 'package:cafemixes/utils/colors.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 
+import 'favoritos.dart';
+import 'buscar.dart';
+import 'FrappeScreen.dart';
+import 'LatteScreen.dart';
+import 'mibarista.dart';
+import 'opinion.dart';
+import 'my_home_page.dart';
+
+
 class CuestionarioScreen extends StatefulWidget {
   @override
   _CuestionarioScreenState createState() => _CuestionarioScreenState();
@@ -35,8 +44,71 @@ class _CuestionarioScreenState extends State<CuestionarioScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  CafeColors.Cafe.shade300,
-        title: Text("Cuestionario")),
+        backgroundColor:  CafeColors.Cafe.shade400,
+        leading: Icon(Icons.grade),
+        title: Text("Opinion"),
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color:  CafeColors.Cafe.shade900,
+              ),
+              child: Text(
+                'Menú',
+                style: TextStyle(
+                  color:  CafeColors.Cafe.shade100,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=> MyHomePage()),
+                ); 
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.account_circle),
+              title: const Text('Mi barista'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Perfil()), 
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.favorite),
+              title: const Text('Mi barista'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FavoritesScreen()), // Reemplaza FavoritesScreen con tu clase correcta
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.ad_units_outlined),
+              title: Text('Receta'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=> LatteScreen()),
+                ); 
+              },
+            ),
+          ],
+        ),
+      ),
+
+        
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [

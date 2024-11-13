@@ -71,16 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.search),
-              title: const Text('Buscar'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Buscar()), 
-                  );
-              },
-            ),
-            ListTile(
               leading: const Icon(Icons.favorite),
               title: const Text('Mi barista'),
               onTap: () {

@@ -76,16 +76,6 @@ class _PerfilState extends State<Perfil>
               }
             ),
             ListTile(
-              leading: Icon(Icons.search),
-              title: Text('Buscar'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Buscar()),
-                );
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.favorite),
               title: Text('Favoritos'),
               onTap: () {
@@ -97,7 +87,7 @@ class _PerfilState extends State<Perfil>
             ),
             ListTile(
               leading: Icon(Icons.grade),
-              title: Text('Navegacion'),
+              title: Text('Opinion'),
               onTap: () {
                 Navigator.push(
                   context,
