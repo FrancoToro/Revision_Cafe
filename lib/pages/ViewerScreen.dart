@@ -6,39 +6,25 @@ import 'my_home_page.dart';
 import 'package:cafemixes/model/Receta.dart';
 
 //escena recetas
-class ViewerScreen extends StatefulWidget {
+class ViewerScreen extends StatelessWidget {
   
   final Receta recipe;
 
-  const ViewerScreen(this.recipe);
+  const ViewerScreen({super.key, required this.recipe});
 
-  @override
-  _ViewerScreenState createState() => _ViewerScreenState();
-}
-
-class _ViewerScreenState extends State<ViewerScreen> {
-  int _rating = 0; // Calificación inicial
-
-  void _rateRecipe(int rating) {
-    setState(() {
-      _rating = rating;
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Has calificado esta receta con $_rating estrella${_rating > 1 ? 's' : ''}.'),
-      ),
-    );
-  }
+  /*ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text('Has calificado esta receta con $_rating estrella${_rating > 1 ? 's' : ''}.'),
+    ),
+  );
+  */
 
   @override
   Widget build(BuildContext context) {
 
-    Receta r = widget.recipe;
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('Receta: ${r.nombre}'),
+        title: Text('Receta: ${recipe.nombre}'),
       ),
       endDrawer: Drawer(
         child: ListView(
@@ -96,19 +82,19 @@ class _ViewerScreenState extends State<ViewerScreen> {
             children: [
               Center(
                 child: Image.network(
-                  r.imagen,
+                  recipe.imagen,
                   height: 200,
                   fit: BoxFit.cover,
                 ),
               ),
               SizedBox(height: 16),
               Text(
-                '${r.nombre}',
+                '${recipe.nombre}',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
               Text(
-                '${widget.recipe.descripcion}',
+                '${recipe.descripcion}',
                 style: TextStyle(fontSize: 16),
               ),
               Divider(height: 32, color: Colors.black),
@@ -118,10 +104,10 @@ class _ViewerScreenState extends State<ViewerScreen> {
               ),
               SizedBox(height: 8),
               ListView.builder(
-                itemCount: r.ingredientes.length,
+                itemCount: recipe.ingredientes.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(r.ingredientes[index])
+                    title: Text(recipe.ingredientes[index])
                   );
                 }
               ),
@@ -132,14 +118,14 @@ class _ViewerScreenState extends State<ViewerScreen> {
               ),
               SizedBox(height: 8),
               ListView.builder(
-                itemCount: r.pasos.length,
+                itemCount: recipe.pasos.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(r.pasos[index])
+                    title: Text(recipe.pasos[index])
                   );
                 }
               ),
-              SizedBox(height: 32),
+              /*SizedBox(height: 32),
               Text(
                 'Califica esta receta:',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -158,7 +144,7 @@ class _ViewerScreenState extends State<ViewerScreen> {
                     },
                   );
                 }),
-              ),
+              ),*/
             ],
           ),
         ),
