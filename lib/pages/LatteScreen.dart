@@ -80,16 +80,6 @@ class _LatteScreenState extends State<LatteScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.search),
-              title: Text('Buscar'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Buscar()),
-                );
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.favorite),
               title: Text('Favoritos'),
               onTap: () {

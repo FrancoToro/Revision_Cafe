@@ -72,16 +72,6 @@ class _FrappeScreenState extends State<FrappeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.search),
-              title: Text('Buscar'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Buscar()),
-                );
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.favorite),
               title: Text('Favoritos'),
               onTap: () {

@@ -103,16 +103,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
                 );
               },
             ),
-            ListTile(
-              leading: Icon(Icons.search),
-              title: Text('Buscar'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Buscar()),
-                );
-              },
-            ),
+
             ListTile(
               leading: Icon(Icons.grade),
               title: Text('Opinion'),
