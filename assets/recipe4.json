@@ -1,0 +1,19 @@
+{
+  "id": 3,
+  "nombre": "Café Frappé",
+  "descripcion": "Café helado y espumoso, perfecto para el verano",
+  "ingredientes": [
+    "1 taza de café espresso frío",
+    "1/2 taza de leche",
+    "1 taza de hielo",
+    "2 cucharadas de azúcar o al gusto",
+    "Crema batida y chocolate rallado para decorar (opcional)"
+  ],
+  "pasos": [
+    "1. En una licuadora, mezcla el café frío, la leche, el hielo y el azúcar hasta que la mezcla quede espumosa y suave.",
+    "2. Vierte la mezcla en un vaso alto.",
+    "3. Decora con crema batida y chocolate rallado si lo deseas. Disfruta."
+  ],
+  "rating": 4,
+  "imagen": "https://commons.wikimedia.org/wiki/File:Cafe-frape-glas-holztisch-unscharf.jpg"
+}

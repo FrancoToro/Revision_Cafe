@@ -1,0 +1,21 @@
+{
+  "id": 2,
+  "nombre": "Café Mocha",
+  "descripcion": "Café con chocolate y leche espumosa",
+  "ingredientes": [
+    "1 taza de leche",
+    "1 taza de café espresso",
+    "2 cucharadas de jarabe de chocolate",
+    "1 cucharada de azúcar o al gusto",
+    "Crema batida (opcional)"
+  ],
+  "pasos": [
+    "1. Calienta la leche en una olla a fuego medio hasta que esté caliente pero sin hervir.",
+    "2. Añade el jarabe de chocolate y el azúcar a la leche caliente y mezcla bien.",
+    "3. Prepara el café espresso y viértelo en una taza grande.",
+    "4. Vierte la leche con chocolate sobre el café y mezcla.",
+    "5. Decora con crema batida y un poco más de jarabe de chocolate si lo deseas. Disfruta."
+  ],
+  "rating": 4,
+  "imagen": "https://upload.wikimedia.org/wikipedia/commons/7/79/Mocha.jpg"
+}

@@ -39,6 +39,10 @@ flutter:
       - assets/icons/user.svg
       - assets/coffe.png
       - assets/cuestionario.json
+      - assets/recipe1.json
+      - assets/recipe2.json
+      - assets/recipe3.json
+      - assets/recipe4.json
 flutter_native_splash:
   color: "#ffffff" # Color de fondo de la SplashScreen
   image: assets/coffe.png # Ruta a la imagen que quieres mostrar

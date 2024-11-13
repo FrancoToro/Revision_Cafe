@@ -1,0 +1,21 @@
+{
+  "id": 3,
+  "nombre": "Caramel Macchiato",
+  "descripcion": "Café con leche y un toque de caramelo",
+  "ingredientes": [
+    "1 taza de leche",
+    "1 taza de café espresso",
+    "2 cucharadas de jarabe de vainilla",
+    "1 cucharada de jarabe de caramelo",
+    "Caramelo líquido para decorar (opcional)"
+  ],
+  "pasos": [
+    "1. Calienta la leche en una olla a fuego medio hasta que esté caliente pero sin hervir.",
+    "2. Añade el jarabe de vainilla a la leche caliente y mezcla bien.",
+    "3. Prepara el café espresso y viértelo en una taza.",
+    "4. Vierte la leche caliente sobre el café, dejando que se forme una capa de espuma en la parte superior.",
+    "5. Agrega un toque de jarabe de caramelo en la parte superior como decoración. Disfruta."
+  ],
+  "rating": 5,
+  "imagen": "https://commons.wikimedia.org/wiki/File:Latte_macchiato_with_coffee_beans.jpg"
+}

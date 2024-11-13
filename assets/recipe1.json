@@ -1,0 +1,20 @@
+{
+    "id": 1,
+    "nombre": "Latte Vainilla",
+    "descripcion": "Café con leche y un toque de vainilla",
+    "ingredientes": [
+      "1 taza de leche",
+      "1 taza de café espresso",
+      "1 cucharadita de esencia de vainilla",
+      "2 cucharadas de azúcar o al gusto",
+      "Canela en polvo para decorar (opcional)"
+    ],
+    "pasos": [
+      "1. Calienta la leche en una olla a fuego medio hasta que esté caliente pero sin que hierva. Luego Añade la esencia de vainilla y el azúcar a la leche caliente y mezcla bien.",
+      "2. Prepara el café espresso y viértelo en una taza grande.",
+      "3. Vierte la leche caliente sobre el café formando una capa de espuma en la parte superior.",
+      "4. Decora con un poco de canela en polvo si lo deseas. Disfruta."
+    ],
+    "rating": 3,
+    "imagen": "https://osterstatic.reciperm.com/webp/10101.webp"
+  }
