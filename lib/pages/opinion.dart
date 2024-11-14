@@ -13,7 +13,6 @@ import 'mibarista.dart';
 import 'opinion.dart';
 import 'my_home_page.dart';
 
-
 class CuestionarioScreen extends StatefulWidget {
   @override
   _CuestionarioScreenState createState() => _CuestionarioScreenState();
@@ -44,7 +43,7 @@ class _CuestionarioScreenState extends State<CuestionarioScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  CafeColors.Cafe.shade400,
+        backgroundColor: CafeColors.Cafe.shade400,
         leading: Icon(Icons.grade),
         title: Text("Opinion"),
       ),
@@ -54,12 +53,12 @@ class _CuestionarioScreenState extends State<CuestionarioScreen> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color:  CafeColors.Cafe.shade900,
+                color: CafeColors.Cafe.shade900,
               ),
               child: Text(
                 'Menú',
                 style: TextStyle(
-                  color:  CafeColors.Cafe.shade100,
+                  color: CafeColors.Cafe.shade100,
                   fontSize: 24,
                 ),
               ),
@@ -70,8 +69,8 @@ class _CuestionarioScreenState extends State<CuestionarioScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context)=> MyHomePage()),
-                ); 
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
               },
             ),
             ListTile(
@@ -80,17 +79,17 @@ class _CuestionarioScreenState extends State<CuestionarioScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Perfil()), 
+                  MaterialPageRoute(builder: (context) => Perfil()),
                 );
               },
             ),
             ListTile(
               leading: const Icon(Icons.favorite),
-              title: const Text('Mi barista'),
+              title: const Text('Favoritos'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FavoritesScreen()), // Reemplaza FavoritesScreen con tu clase correcta
+                  MaterialPageRoute(builder: (context) => FavoritesScreen()),
                 );
               },
             ),
@@ -100,15 +99,13 @@ class _CuestionarioScreenState extends State<CuestionarioScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context)=> LatteScreen()),
-                ); 
+                  MaterialPageRoute(builder: (context) => LatteScreen()),
+                );
               },
             ),
           ],
         ),
       ),
-
-        
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
@@ -156,34 +153,34 @@ class _CuestionarioScreenState extends State<CuestionarioScreen> {
   }
 
   void _submit() async {
-  // Genera el contenido del correo con las respuestas del cuestionario
-  String mensaje = 'Respuestas del Cuestionario:\n\n';
-  mensaje += 'Sección: Usabilidad\n';
-  for (var pregunta in _cuestionario!.usabilidad) {
-    mensaje += '${pregunta.titulo}: ${pregunta.valor} estrellas\n';
-  }
-  mensaje += '\nSección: Contenido\n';
-  for (var pregunta in _cuestionario!.contenido) {
-    mensaje += '${pregunta.titulo}: ${pregunta.valor} estrellas\n';
-  }
+    // Genera el contenido del correo con las respuestas del cuestionario
+    String mensaje = 'Respuestas del Cuestionario:\n\n';
+    mensaje += 'Sección: Usabilidad\n';
+    for (var pregunta in _cuestionario!.usabilidad) {
+      mensaje += '${pregunta.titulo}: ${pregunta.valor} estrellas\n';
+    }
+    mensaje += '\nSección: Contenido\n';
+    for (var pregunta in _cuestionario!.contenido) {
+      mensaje += '${pregunta.titulo}: ${pregunta.valor} estrellas\n';
+    }
 
-  // Crea el correo
-  final email = Email(
-    subject: 'Resultados del Cuestionario',
-    body: mensaje,
-    recipients: ['torowinner11@gmail.com'], // Reemplaza con el correo del desarrollador
-  );
+    // Crea el correo
+    final email = Email(
+      subject: 'Resultados del Cuestionario',
+      body: mensaje,
+      recipients: ['torowinner11@gmail.com'],
+    );
 
-  try {
-    // Envía el correo
-    await FlutterEmailSender.send(email);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Respuestas enviadas con éxito')),
-    );
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Error al enviar las respuestas: $e')),
-    );
+    try {
+      // Envía el correo
+      await FlutterEmailSender.send(email);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Respuestas enviadas con éxito')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al enviar las respuestas: ${e.toString()}')),
+      );
+    }
   }
-}
 }

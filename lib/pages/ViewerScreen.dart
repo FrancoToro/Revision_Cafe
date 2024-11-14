@@ -1,5 +1,4 @@
 import 'package:cafemixes/utils/DatabaseHelper.dart';
-import 'package:cafemixes/utils/flutter/dev/integration_tests/flutter_gallery/lib/demo/all.dart';
 import 'package:flutter/material.dart';
 import 'favoritos.dart';
 import 'buscar.dart';
